@@ -13,7 +13,7 @@ local MODE = {
     right = "l",
   }
 -- Run zellij action safely
-local function zellij_action(args)
+function M.zellij_action(args)
   vim.fn.system("zellij action " .. args)
   if vim.v.shell_error ~= 0 then
     error("zellij executable not found in PATH")
@@ -28,7 +28,7 @@ local function navigate(direction, vim_key, fallback)
 
   -- If vim didn't move, fallback to zellij
   if before == after then
-    zellij_action(fallback .. " " .. direction)
+    M.zellij_action(fallback .. " " .. direction)
   end
 end
 
@@ -44,28 +44,28 @@ end
 
 -- Tab actions
 function M.new_tab()
-  zellij_action("new-tab")
+  M.zellij_action("new-tab")
 end
 
 function M.rename_tab(name)
-  zellij_action("rename-tab " .. name)
+  M.zellij_action("rename-tab " .. name)
 end
 
 function M.move_tab(direction)
-  zellij_action("move-tab " .. direction)
+  M.zellij_action("move-tab " .. direction)
 end
 
 -- Pane actions
 function M.new_pane()
-  zellij_action("new-pane")
+  M.zellij_action("new-pane")
 end
 
 function M.rename_pane(name)
-  zellij_action("rename-pane " .. name)
+  M.zellij_action("rename-pane " .. name)
 end
 
 function M.move_pane(direction)
-  zellij_action("move-pane " .. direction)
+  M.zellij_action("move-pane " .. direction)
 end
 
 -- Setup user commands
