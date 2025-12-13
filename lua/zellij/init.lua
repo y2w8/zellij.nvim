@@ -44,11 +44,12 @@ end
 
 -- Tab actions
 function M.new_tab(opts)
-  local args = opts.args or ""
+  if type(opts) == "table" then
+    opts = opts.args
+  end
 
-  if args ~= "" then
-    -- allow custom flags like -d right, -n name, etc
-    M.zellij_action("new-tab " .. args)
+  if opts ~= "" then
+    M.zellij_action("new-tab " .. opts)
   else
     M.zellij_action("new-tab")
   end
@@ -77,11 +78,13 @@ end
 
 -- Pane actions
 function M.new_pane(opts)
-  local args = opts.args or ""
+  if type(opts) == "table" then
+    opts = opts.args
+  end
 
-  if args ~= "" then
+  if opts ~= "" then
     -- allow custom flags like -d right, -n name, etc
-    M.zellij_action("new-pane " .. args)
+    M.zellij_action("new-pane " .. opts)
   else
     M.zellij_action("new-pane")
   end
