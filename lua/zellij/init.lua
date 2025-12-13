@@ -47,8 +47,8 @@ function M.new_tab()
   zellij_action("new-tab")
 end
 
-function M.rename_tab()
-  zellij_action("rename-tab")
+function M.rename_tab(name)
+  zellij_action("rename-tab " .. name)
 end
 
 function M.move_tab(direction)
@@ -60,8 +60,8 @@ function M.new_pane()
   zellij_action("new-pane")
 end
 
-function M.rename_pane()
-  zellij_action("rename-pane")
+function M.rename_pane(name)
+  zellij_action("rename-pane " .. name)
 end
 
 function M.move_pane(direction)
