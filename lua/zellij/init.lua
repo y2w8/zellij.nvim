@@ -55,6 +55,19 @@ function M.move_tab(direction)
   zellij_action("move-tab " .. direction)
 end
 
+-- Pane actions
+function M.new_pane()
+  zellij_action("new-pane")
+end
+
+function M.rename_pane()
+  zellij_action("rename-pane")
+end
+
+function M.move_pane(direction)
+  zellij_action("move-pane " .. direction)
+end
+
 -- Setup user commands
 function M.setup()
   vim.api.nvim_create_user_command("ZellijUp", function() M.move("up") end, {})
@@ -70,6 +83,12 @@ function M.setup()
   vim.api.nvim_create_user_command("ZellijNewTab", M.new_tab, {})
   vim.api.nvim_create_user_command("ZellijMoveTabRight", function() M.move_tab("right") end, {})
   vim.api.nvim_create_user_command("ZellijMoveTabLeft", function() M.move_tab("left") end, {})
+
+  vim.api.nvim_create_user_command("ZellijNewPane", M.new_tab, {})
+  vim.api.nvim_create_user_command("ZellijMovePaneUp", function() M.move_pane("up") end, {})
+  vim.api.nvim_create_user_command("ZellijMovePaneDown", function() M.move_pane("down") end, {})
+  vim.api.nvim_create_user_command("ZellijMovePaneRight", function() M.move_pane("right") end, {})
+  vim.api.nvim_create_user_command("ZellijMovePaneLeft", function() M.move_pane("left") end, {})
 
 end
 
