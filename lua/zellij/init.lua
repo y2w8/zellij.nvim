@@ -42,6 +42,19 @@ function M.move_or_tab(direction)
   navigate(direction, direction_translation[direction], "move-focus-or-tab")
 end
 
+-- Tab actions
+function M.new_tab()
+  zellij_action("new-tab")
+end
+
+function M.rename_tab()
+  zellij_action("rename-tab")
+end
+
+function M.move_tab(direction)
+  zellij_action("move-tab " .. direction)
+end
+
 -- Setup user commands
 function M.setup()
   vim.api.nvim_create_user_command("ZellijUp", function() M.move("up") end, {})
@@ -53,6 +66,11 @@ function M.setup()
   vim.api.nvim_create_user_command("ZellijDownTab", function() M.move_or_tab("down") end, {})
   vim.api.nvim_create_user_command("ZellijLeftTab", function() M.move_or_tab("left") end, {})
   vim.api.nvim_create_user_command("ZellijRightTab", function() M.move_or_tab("right") end, {})
+
+  vim.api.nvim_create_user_command("ZellijNewTab", M.new_tab, {})
+  vim.api.nvim_create_user_command("ZellijMoveTabRight", function() M.move_tab("right") end, {})
+  vim.api.nvim_create_user_command("ZellijMoveTabLeft", function() M.move_tab("left") end, {})
+
 end
 
 return M
