@@ -48,10 +48,12 @@ function M.new_tab()
 end
 
 function M.rename_tab(name)
-  if name == "" then
-    name = vim.fn.input("Tab name: ")
-  elseif type(name) == "table" then
+  if type(name) == "table" then
     name = name.args
+  end
+
+  if name == "" or name == nil then
+    name = vim.fn.input("Tab name: ")
   end
 
   if name == nil or name == "" then
@@ -72,10 +74,12 @@ function M.new_pane()
 end
 
 function M.rename_pane(name)
+    if type(name) == "table" then
+    name = name.args
+  end
+
   if name == "" or name == nil then
     name = vim.fn.input("Pane name: ")
-  elseif type(name) == "table" then
-    name = name.args
   end
 
   if name == nil or name == "" then
