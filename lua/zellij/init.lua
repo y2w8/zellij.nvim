@@ -97,8 +97,6 @@ function M.setup()
   vim.api.nvim_create_user_command("ZellijLeft", function() M.move("left") end, {})
   vim.api.nvim_create_user_command("ZellijRight", function() M.move("right") end, {})
 
-  vim.api.nvim_create_user_command("ZellijUpTab", function() M.move_or_tab("up") end, {})
-  vim.api.nvim_create_user_command("ZellijDownTab", function() M.move_or_tab("down") end, {})
   vim.api.nvim_create_user_command("ZellijLeftTab", function() M.move_or_tab("left") end, {})
   vim.api.nvim_create_user_command("ZellijRightTab", function() M.move_or_tab("right") end, {})
 
