@@ -109,7 +109,7 @@ function M.setup()
   vim.api.nvim_create_user_command("ZellijMoveTabRight", function() M.move_tab("right") end, {})
   vim.api.nvim_create_user_command("ZellijMoveTabLeft", function() M.move_tab("left") end, {})
 
-  vim.api.nvim_create_user_command("ZellijNewPane", M.new_tab, {})
+  vim.api.nvim_create_user_command("ZellijNewPane", M.new_pane, {})
   vim.api.nvim_create_user_command("ZellijRenamePane", M.rename_pane, { nargs = "?" })
   vim.api.nvim_create_user_command("ZellijMovePaneUp", function() M.move_pane("up") end, {})
   vim.api.nvim_create_user_command("ZellijMovePaneDown", function() M.move_pane("down") end, {})
