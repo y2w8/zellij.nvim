@@ -69,8 +69,15 @@ function M.move_tab(direction)
 end
 
 -- Pane actions
-function M.new_pane()
-  M.zellij_action("new-pane")
+function M.new_pane(opts)
+  local args = opts.args or ""
+
+  if args ~= "" then
+    -- allow custom flags like -d right, -n name, etc
+    M.zellij_action("new-pane " .. args)
+  else
+    M.zellij_action("new-pane")
+  end
 end
 
 function M.rename_pane(name)
@@ -104,12 +111,12 @@ function M.setup()
   vim.api.nvim_create_user_command("ZellijLeftTab", function() M.move_or_tab("left") end, {})
   vim.api.nvim_create_user_command("ZellijRightTab", function() M.move_or_tab("right") end, {})
 
-  vim.api.nvim_create_user_command("ZellijNewTab", M.new_tab, {})
+  vim.api.nvim_create_user_command("ZellijNewTab", M.new_tab, { nargs = "*" })
   vim.api.nvim_create_user_command("ZellijRenameTab", M.rename_tab, { nargs = "?" })
   vim.api.nvim_create_user_command("ZellijMoveTabRight", function() M.move_tab("right") end, {})
   vim.api.nvim_create_user_command("ZellijMoveTabLeft", function() M.move_tab("left") end, {})
 
-  vim.api.nvim_create_user_command("ZellijNewPane", M.new_pane, {})
+  vim.api.nvim_create_user_command("ZellijNewPane", M.new_pane, { nargs = "?" })
   vim.api.nvim_create_user_command("ZellijRenamePane", M.rename_pane, { nargs = "?" })
   vim.api.nvim_create_user_command("ZellijMovePaneUp", function() M.move_pane("up") end, {})
   vim.api.nvim_create_user_command("ZellijMovePaneDown", function() M.move_pane("down") end, {})
