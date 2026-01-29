@@ -8,6 +8,9 @@ local direction_translation = {
 }
 -- Run zellij action safely
 function M.zellij_action(args)
+	if not os.getenv("ZELLIJ") then
+		return
+	end
 	vim.fn.system("zellij action " .. args)
 	if vim.v.shell_error ~= 0 then
 		error("zellij executable not found in PATH")
