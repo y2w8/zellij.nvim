@@ -10,10 +10,10 @@ giving you seamless navigation between Neovim splits and Zellij panes/tabs
     opts = {}, -- Important even if empty
     keys = {
     -- Window navigation
-    { "<C-k>", ":ZellijUp<CR>", desc = "Move up", silent = true  },
-    { "<C-j>", ":ZellijDown<CR>", desc = "Move down", silent = true  },
-    { "<C-h>", ":ZellijLeftTab<CR>", desc = "Move left", silent = true  },
-    { "<C-l>", ":ZellijRightTab<CR>", desc = "Move right", silent = true  },
+    { "<C-k>", ":ZellijUp<CR>", mode = { "n", "t" }, desc = "Move up", silent = true  },
+    { "<C-j>", ":ZellijDown<CR>", mode = { "n", "t" }, desc = "Move down", silent = true  },
+    { "<C-h>", ":ZellijLeftTab<CR>", mode = { "n", "t" }, desc = "Move left", silent = true  },
+    { "<C-l>", ":ZellijRightTab<CR>", mode = { "n", "t" }, desc = "Move right", silent = true  },
 
     -- Tab actions
     { "<leader>zt", ":ZellijNewTab<CR>", desc = "New Zellij Tab", silent = true  },
