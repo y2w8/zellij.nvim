@@ -41,8 +41,10 @@ giving you seamless navigation between Neovim splits and Zellij panes/tabs
 | `:ZellijDown` | require("zellij").move("down") | Move down |
 | `:ZellijLeft` | require("zellij").move("left") | Move left |
 | `:ZellijRight` | require("zellij").move("right") | Move right |
-| `:ZellijLeftTab` | require("zellij").move_or_tab("left") | Move left or switch tab |
-| `:ZellijRightTab` | require("zellij").move_or_tab("right") | Move right or switch tab |
+| `:ZellijLeftTab` | require("zellij").move_or_tab("left", false) | Move left or switch tab (zellij tabs) |
+| `:ZellijRightTab` | require("zellij").move_or_tab("right", false) | Move right or switch tab (zellij tabs) |
+| `:ZellijLeftSmart` | require("zellij").move_or_tab("left", true) | Move left or switch tab (nvim tab or zellij tab) |
+| `:ZellijRightSmart` | require("zellij").move_or_tab("right", true) | Move right or switch tab (nvim tab or zellij tab) |
 
 
 ### Tab Managment

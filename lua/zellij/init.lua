@@ -18,14 +18,30 @@ function M.zellij_action(args)
 end
 
 -- Try vim window move, fallback to zellij
-local function navigate(direction, vim_key, fallback)
+local function navigate(direction, vim_key, fallback_zellij, fallback_nvim)
 	local before = vim.fn.winnr()
 	vim.cmd("wincmd " .. vim_key)
 	local after = vim.fn.winnr()
 
 	-- If vim didn't move, fallback to zellij
 	if before == after then
-		M.zellij_action(fallback .. " " .. direction)
+    if fallback_nvim then
+      local current_tab = vim.fn.tabpagenr()
+      local last_tab = vim.fn.tabpagenr("$")
+
+      -- 2. Fallback to Tab switching based on direction
+      -- We'll use 'l' (right) and 'h' (left) to trigger tab movement
+      if direction == "right" and current_tab < last_tab then
+        vim.cmd("tabnext")
+        return -- Success
+      elseif direction == "left" and current_tab > 1 then
+        vim.cmd("tabprevious")
+        return -- Success
+      end
+
+        -- If we reach here, neither window nor tab could move: escape to Zellij
+        M.zellij_action(fallback_zellij .. " " .. direction)
+    end
 	end
 end
 
@@ -35,8 +51,8 @@ function M.move(direction)
 end
 
 -- Window navigation or tab switch
-function M.move_or_tab(direction)
-	navigate(direction, direction_translation[direction], "move-focus-or-tab")
+function M.move_or_tab(direction, fallback_nvim)
+	navigate(direction, direction_translation[direction], "move-focus-or-tab", fallback_nvim)
 end
 
 -- Tab actions
@@ -124,10 +140,17 @@ function M.setup()
 	end, {})
 
 	vim.api.nvim_create_user_command("ZellijLeftTab", function()
-		M.move_or_tab("left")
+		M.move_or_tab("left", false)
 	end, {})
 	vim.api.nvim_create_user_command("ZellijRightTab", function()
-		M.move_or_tab("right")
+		M.move_or_tab("right", false)
+	end, {})
+
+	vim.api.nvim_create_user_command("ZellijLeftSmart", function()
+		M.move_or_tab("left", true)
+	end, {})
+	vim.api.nvim_create_user_command("ZellijRightSmart", function()
+		M.move_or_tab("right", true)
 	end, {})
 
 	vim.api.nvim_create_user_command("ZellijNewTab", M.new_tab, { nargs = "*" })
