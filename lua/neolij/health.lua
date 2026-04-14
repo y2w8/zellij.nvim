@@ -1,6 +1,6 @@
 local health = vim.health or require("health")
 
-health.start("zellij.nvim")
+health.start("neolij.nvim")
 
 -- Neovim version check
 if vim.fn.has("nvim-0.9") == 1 then

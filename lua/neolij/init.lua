@@ -33,10 +33,10 @@ local function navigate(direction, vim_key, fallback_zellij, fallback_nvim)
       -- We'll use 'l' (right) and 'h' (left) to trigger tab movement
       if direction == "right" and current_tab < last_tab then
         vim.cmd("tabnext")
-        return -- Success
+        return
       elseif direction == "left" and current_tab > 1 then
         vim.cmd("tabprevious")
-        return -- Success
+        return
       end
 
         -- If we reach here, neither window nor tab could move: escape to Zellij
@@ -126,54 +126,54 @@ end
 
 -- Setup user commands
 function M.setup()
-	vim.api.nvim_create_user_command("ZellijUp", function()
+	vim.api.nvim_create_user_command("NeolijUp", function()
 		M.move("up")
 	end, {})
-	vim.api.nvim_create_user_command("ZellijDown", function()
+	vim.api.nvim_create_user_command("NeolijDown", function()
 		M.move("down")
 	end, {})
-	vim.api.nvim_create_user_command("ZellijLeft", function()
+	vim.api.nvim_create_user_command("NeolijLeft", function()
 		M.move("left")
 	end, {})
-	vim.api.nvim_create_user_command("ZellijRight", function()
+	vim.api.nvim_create_user_command("NeolijRight", function()
 		M.move("right")
 	end, {})
 
-	vim.api.nvim_create_user_command("ZellijLeftTab", function()
+	vim.api.nvim_create_user_command("NeolijLeftTab", function()
 		M.move_or_tab("left", false)
 	end, {})
-	vim.api.nvim_create_user_command("ZellijRightTab", function()
+	vim.api.nvim_create_user_command("NeolijRightTab", function()
 		M.move_or_tab("right", false)
 	end, {})
 
-	vim.api.nvim_create_user_command("ZellijLeftSmart", function()
+	vim.api.nvim_create_user_command("NeolijLeftSmart", function()
 		M.move_or_tab("left", true)
 	end, {})
-	vim.api.nvim_create_user_command("ZellijRightSmart", function()
+	vim.api.nvim_create_user_command("NeolijRightSmart", function()
 		M.move_or_tab("right", true)
 	end, {})
 
-	vim.api.nvim_create_user_command("ZellijNewTab", M.new_tab, { nargs = "*" })
-	vim.api.nvim_create_user_command("ZellijRenameTab", M.rename_tab, { nargs = "?" })
-	vim.api.nvim_create_user_command("ZellijMoveTabRight", function()
+	vim.api.nvim_create_user_command("NeolijNewTab", M.new_tab, { nargs = "*" })
+	vim.api.nvim_create_user_command("NeolijRenameTab", M.rename_tab, { nargs = "?" })
+	vim.api.nvim_create_user_command("NeolijMoveTabRight", function()
 		M.move_tab("right")
 	end, {})
-	vim.api.nvim_create_user_command("ZellijMoveTabLeft", function()
+	vim.api.nvim_create_user_command("NeolijMoveTabLeft", function()
 		M.move_tab("left")
 	end, {})
 
-	vim.api.nvim_create_user_command("ZellijNewPane", M.new_pane, { nargs = "*" })
-	vim.api.nvim_create_user_command("ZellijRenamePane", M.rename_pane, { nargs = "?" })
-	vim.api.nvim_create_user_command("ZellijMovePaneUp", function()
+	vim.api.nvim_create_user_command("NeolijNewPane", M.new_pane, { nargs = "*" })
+	vim.api.nvim_create_user_command("NeolijRenamePane", M.rename_pane, { nargs = "?" })
+	vim.api.nvim_create_user_command("NeolijMovePaneUp", function()
 		M.move_pane("up")
 	end, {})
-	vim.api.nvim_create_user_command("ZellijMovePaneDown", function()
+	vim.api.nvim_create_user_command("NeolijMovePaneDown", function()
 		M.move_pane("down")
 	end, {})
-	vim.api.nvim_create_user_command("ZellijMovePaneRight", function()
+	vim.api.nvim_create_user_command("NeolijMovePaneRight", function()
 		M.move_pane("right")
 	end, {})
-	vim.api.nvim_create_user_command("ZellijMovePaneLeft", function()
+	vim.api.nvim_create_user_command("NeolijMovePaneLeft", function()
 		M.move_pane("left")
 	end, {})
 end
