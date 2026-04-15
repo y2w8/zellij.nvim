@@ -6,6 +6,14 @@ local direction_translation = {
 	left = "h",
 	right = "l",
 }
+
+local default_config = {
+  -- if use vim-zellij-navigator plugin set this to true.
+  vim_zellij_navigator = false
+}
+
+M.config = {}
+
 -- Run zellij action safely
 function M.zellij_action(args)
 	if not os.getenv("ZELLIJ") then
@@ -125,7 +133,15 @@ function M.move_pane(direction)
 end
 
 -- Setup user commands
-function M.setup()
+function M.setup(user_config)
+  M.config = vim.tbl_deep_extend("force", default_config, user_config or {})
+  if M.config.vim_zellij_navigator then
+    vim.fn.jobstart('zellij pipe -n "nvim_hook" "open"')
+    vim.api.nvim_create_autocmd({"VimLeavePre"}, {
+        pattern = {"*"},
+        command = 'zellij pipe -n "nvim_hook" "close"'
+    })
+  end
 	vim.api.nvim_create_user_command("NeolijUp", function()
 		M.move("up")
 	end, {})

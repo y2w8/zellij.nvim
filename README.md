@@ -35,8 +35,12 @@ giving you seamless navigation between Neovim splits and Zellij panes/tabs
 ```
 
 ### Zellij
-```kdl
 
+
+<details>
+  <summary>Autolock plugin</summary>
+
+```kdl
 keybinds clear-defaults=true {
     shared_except "locked" {
         bind "Ctrl left" { MoveFocusOrTab "left"; }
@@ -59,14 +63,107 @@ plugins {
         // Print to Zellij log? (default=false)
         print_to_log false
     }
+
+    // OR
+
+    vim_zellij_navigator location="https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm"
 }
 
 // Plugins to load in the background when a new session starts
 load_plugins {
     autolock
 }
-
 ```
+</details>
+
+<details>
+  <summary>vim-zellij-navigator plugin</summary>
+
+> [!NOTE] 
+> if you use `vim-zellij-navigator` you have to set `vim_zellij_navigator = true` in the configuration.
+> ```lua
+> require("neolij").setup({
+>   vim_zellij_navigator = true
+> })
+> ```
+
+```kdl
+keybinds clear-defaults=true {
+    shared_except "locked" {
+        bind "Ctrl j" {
+            MessagePlugin "vim_zellij_navigator" {
+                name "move_focus";
+                payload "down";
+
+                move_mod "ctrl";
+                use_arrow_keys "false";
+            };
+        }
+
+        bind "Ctrl k" {
+            MessagePlugin "vim_zellij_navigator" {
+                name "move_focus";
+                payload "up";
+
+                move_mod "ctrl";
+                use_arrow_keys "false";
+            };
+        }
+
+        bind "Ctrl l" {
+            MessagePlugin "vim_zellij_navigator" {
+                name "move_focus_or_tab";
+                payload "right";
+
+                move_mod "ctrl"; // Optional, should be added on every command if you want to use it
+                use_arrow_keys "false";
+            };
+        }
+
+        bind "Alt h" {
+            MessagePlugin "vim_zellij_navigator" {
+                name "resize";
+                payload "left";
+
+                resize_mod "alt"; 
+            };
+        }
+
+        bind "Alt j" {
+            MessagePlugin "vim_zellij_navigator" {
+                name "resize";
+                payload "down";
+
+                resize_mod "alt";
+            };
+        }
+
+        bind "Alt k" {
+            MessagePlugin "vim_zellij_navigator" {
+                name "resize";
+                payload "up";
+
+                resize_mod "alt";
+            };
+        }
+
+        bind "Alt l" {
+            MessagePlugin "vim_zellij_navigator" {
+                name "resize";
+                payload "right";
+
+                resize_mod "alt";
+            };
+        }
+    }
+}
+
+plugins {
+    vim_zellij_navigator location="https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm"
+}
+```
+</details>
+
 
 
 ## Commands
