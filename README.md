@@ -1,6 +1,10 @@
 # Neolij.nvim
 A lightweight Neovim plugin that integrates Neovim window navigation with [Zellij](https://zellij.dev/). If Neovim can’t move to another window, it automatically falls back to Zellij actions.
 giving you seamless navigation between Neovim splits and Zellij panes/tabs
+
+## Demo
+<img width="782" height="650" alt="demo" src="https://github.com/user-attachments/assets/f7159320-d5bc-43bb-a0ca-a2e15077d5ba" />
+
 ## Installing
 ### lazyvim
 ```lua
